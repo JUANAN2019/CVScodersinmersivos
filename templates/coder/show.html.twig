@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{coder.name}} | {{coder.surname}} {% endblock %}
+
+{% block body %}
+    
+    <embed src='https://coderf5.es/cvs/{{coder.url}}.pdf#toolbar=1&navpanes=1&scrollbar=0' type='application/pdf' 
+    style="width: 100%; height: 1000px;"/>
+
+    
+{% endblock %}
