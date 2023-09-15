@@ -1,160 +1,137 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Coder index{% endblock %}
+{% block title %}Coder F5
+{% endblock %}
 
 {% block stylesheets %}
-            <style>
-            .yadcf-filter-reset-button {
-            border: 1px solid grey;
-            }
-            {#Para ajustar los los colores y el margen de los inputs y los selects de los filtros#}
-            .yadcf-filter {
-            color: #787878!important;
-            max-width: 70px;
-            }
-            {#Para igualar los inputs#}
-            input[type="text"] {
-            padding: 0px 2px;
-            }
-            .scrollable-cell {
-            max-height: 150px;
-            overflow-y: scroll;
-            display: block;
-            min-height: 45px;
-            }
-            {#Para estrechar#}
-            table.dataTable thead th, table.dataTable thead td {
-            padding: 6px!important;
-            }
+	<style>
+		.yadcf-filter-reset-button {
+			border: 1px solid grey;
+		}
+		{
+			#Para ajustar los los colores y el margen de los inputs y los selects de los filtros#
+		}
+		.yadcf-filter {
+			color: #787878 !important;
+			max-width: 70px;
+		}
+		{
+			#Para igualar los inputs#
+		}
+		input[type="text"] {
+			padding: 0 2px;
+		}
+		.scrollable-cell {
+			max-height: 150px;
+			overflow-y: scroll;
+			display: block;
+			min-height: 45px;
+		}
+		{
+			#Para estrechar#
+		}
+		table.dataTable thead th,
+		table.dataTable thead td {
+			padding: 6px !important;
+		}
 
 
-            table.dataTable thead > tr > th.sorting, table.dataTable thead > tr > th.sorting_asc {
-            padding-right: 20px!important;
-            }
-            .yadcf-filter-wrapper {
-            display: block!important;
-            }
+		table.dataTable thead > tr > th.sorting,
+		table.dataTable thead > tr > th.sorting_asc {
+			padding-right: 20px !important;
+		}
+		.yadcf-filter-wrapper {
+			display: block !important;
+		}
 
 
-            @media screen and (max-width: 1400px) {
-            table thead {
-            display: none;
-            }
-            table tr {
-            border-bottom: 2px solid #939191;
-            display: block;
-            margin-bottom: 1.225em;
-            }
-            table td {
-            border-bottom: 1px solid #ddd;
-            display: block;
-            }
-            table td::before {
-            content: attr(data-label);
-            float: left;
-            font-weight: bold;
-            text-transform: uppercase;
-            }
-            table td:last-child {
-            border-bottom: 0;
-            }
+		@media screen and(max-width: 1400px) {
+			table thead {
+				display: none;
+			}
+			table tr {
+				border-bottom: 2px solid #939191;
+				display: block;
+				margin-bottom: 1.225em;
+			}
+			table td {
+				border-bottom: 1px solid #ddd;
+				display: block;
+			}
+			table td::before {
+				content: attr(data-label);
+				float: left;
+				font-weight: bold;
+				text-transform: uppercase;
+			}
+			table td:last-child {
+				border-bottom: 0;
+			}
 
 
-            .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter {
-            text-align: left!important;
-            margin-bottom: 20px!important;
-            }
-            }
-            </style>
-        {% endblock %}
-
+			.dataTables_wrapper .dataTables_length,
+			.dataTables_wrapper .dataTables_filter {
+				text-align: left !important;
+				margin-bottom: 20px !important;
+			}
+		}
+	</style>
+{% endblock %}
 
 
 {% block body %}
-    <h1>Coder index</h1>
+	<h1>Coder F5</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>Description</th>
-                <th>Bootcamp</th>
-                <th>Competence</th>
-                <th>Url</th>
-                
-            </tr>
-        </thead>
-        <tbody>
-        {% for coder in coders %}
-            <tr>
-                <td>{{ coder.id }}</td>
-                <td>{{ coder.name }}</td>
-                <td>{{ coder.surname }}</td>
-                <td>{{ coder.description }}</td>
-                <td>{{ coder.url }}</td>
-                <td>{% if coder.FkCompetence is iterable %}
-                        {% for c in coder.FkCompetence %}
-                        <span class="badge text-bg-success rounded-pill">{{c.name}}</span>
-                        {% endfor %}
-                    {% endif %}
-                </td>
-                <td>
-                    <a href="{{ path('app_coder_show', {'id': coder.id}) }}">show</a>
-                    <a href="{{ path('app_coder_edit', {'id': coder.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	<table class="table" id="myTable">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Surname</th>
+				<th>Description</th>
+				<th>Competence</th>
+				<th>Url</th>
 
-    <a href="{{ path('app_coder_new') }}">Create new</a>
+			</tr>
+		</thead>
+		<tbody>
+			{% for coder in coders %}
+				<tr>
+					<td>{{ coder.name }}</td>
+					<td>{{ coder.surname }}</td>
+					<td>{{ coder.description }}</td>
+					<td>
+						{% if coder.FkCompetence is iterable %}
+							{% for c in coder.FkCompetence %}
+								<span class="badge text-bg-success rounded-pill">{{c.name}}</span>
+							{% endfor %}
+						{% endif %}
+					</td>
+                    <td>{{ coder.url }}</td>
+					
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="6">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 
 
-    <script>
-        $(document).ready( function () {
-        var dataTable = $('#myTable').DataTable({
-        "columnDefs": [
-        {
-        "targets": 7,
-        "className": 'scrollable-column',
-        "createdCell": function (td) {
-        $(td).addClass('scrollable-cell');
-        }
-        }
-        ]
+	<script>
+        $(document).ready(function () {
+            var dataTable = $('#myTable').DataTable({
+                "columnDefs": [
+                    {
+                        "targets": 3,
+                        "className": 'scrollable-column',
+                        "createdCell": function (td) {
+                            $(td).addClass('scrollable-cell');
+                        }
+                    }
+                ]
+            });
         });
-        yadcf.init(dataTable, [{
-        column_number: 0,
-        data: [{% for c in FkCompetence %}'{{c.name}}', {% endfor %}]
-        {# }, {
-        column_number: 1,
-        data: [{% for c in theme %}'{{c.name}}', {% endfor %}]
-        }, {
-        column_number: 2,
-        data: [{% for s in subtopic %}'{{s.name}}', {% endfor %}]
-        }, {
-        column_number: 3,
-        data: [{% for ty in type %}'{{ty.name}}', {% endfor %}]
-        }, {
-        column_number: 4,
-        filter_type: "text"
-        }, {
-        column_number: 5,
-        data: [{% for u in user %}'{{u.email}}', {% endfor %}]
-        }, {
-        column_number: 6,
-        data: ['Yes', 'No']
-        }, {
-        column_number: 7,
-        filter_type: "text"
-        } #}
-        ]);
-        });
-    </script>
+	</script>
 {% endblock %}
+

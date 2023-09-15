@@ -9,34 +9,14 @@
         
         <style>
             body {
-            background-color: #eeeded!important;
+                background-color: #eeeded!important;
             }
             .container {
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,.1);
-            padding: 30px
-            }
-            button, a{
-            margin: 3px!important;
-            }
-            input, textarea, select {
-            max-width: 400px;
-            }
-            .select2-container {
-            display: block!important;
-            }
-            .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
-            margin-top: -1px!important;
-            }
-            .select2-container--default .select2-selection--multiple .select2-selection__choice__display {
-            padding-left: 7px;
-            }
-            #resources >div {
-            margin-top: 15px;
-            }
-            label {
-            margin-top: 10px;
+                background-color: #fff;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0,0,0,.1);
+                padding: 30px;
+                margin-top: 30px;
             }
         </style>
 
@@ -50,8 +30,9 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-
+        <div class="container">
+            {% block body %}{% endblock %}
+        </div>
 
         <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
