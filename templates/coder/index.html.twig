@@ -9,14 +9,12 @@
 			border: 1px solid grey;
 		}
 		{
-			#Para ajustar los los colores y el margen de los inputs y los selects de los filtros#
 		}
 		.yadcf-filter {
 			color: #787878 !important;
 			max-width: 70px;
 		}
 		{
-			#Para igualar los inputs#
 		}
 		input[type="text"] {
 			padding: 0 2px;
@@ -27,15 +25,10 @@
 			display: block;
 			min-height: 45px;
 		}
-		{
-			#Para estrechar#
-		}
 		table.dataTable thead th,
 		table.dataTable thead td {
 			padding: 6px !important;
 		}
-
-
 		table.dataTable thead > tr > th.sorting,
 		table.dataTable thead > tr > th.sorting_asc {
 			padding-right: 20px !important;
@@ -81,6 +74,7 @@
 
 {% block body %}
 	<h1>Coder F5</h1>
+    <br/>
 
 	<table class="table" id="myTable">
 		<thead>
@@ -88,8 +82,8 @@
 				<th>Name</th>
 				<th>Surname</th>
 				<th>Description</th>
-				<th>Competence</th>
-				<th>Url</th>
+				<th>Competences</th>
+				<th>CV</th>
 
 			</tr>
 		</thead>
@@ -106,7 +100,9 @@
 							{% endfor %}
 						{% endif %}
 					</td>
-                    <td>{{ coder.url }}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ path('app_coder_show', {'id': coder.id}) }}">CV</a>
+                    </td>
 					
 				</tr>
 			{% else %}
@@ -131,6 +127,16 @@
                     }
                 ]
             });
+            yadcf.init(dataTable, [{
+                column_number: 0,
+            }, {
+                column_number: 1,
+            }, {
+                column_number: 2,
+            }, {
+                column_number: 3,
+                data: [{% for c in competences %}'{{c.name}}', {% endfor %}]
+            }]); 
         });
 	</script>
 {% endblock %}
