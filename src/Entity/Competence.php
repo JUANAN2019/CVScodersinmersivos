@@ -20,10 +20,6 @@ class Competence
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Level $fkLevel = null;
-
     #[ORM\ManyToMany(targetEntity: Coder::class, mappedBy: 'fkCompetence')]
     private Collection $coders;
 
@@ -45,18 +41,6 @@ class Competence
     public function setName(string $name): static
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getFkLevel(): ?Level
-    {
-        return $this->fkLevel;
-    }
-
-    public function setFkLevel(Level $fkLevel): static
-    {
-        $this->fkLevel = $fkLevel;
 
         return $this;
     }
